@@ -197,6 +197,111 @@ export const forgotPassword = (email) => async (dispatch) => {
 
 }
 
+export const allUsers = () => async (dispatch) => {
+    try {
+
+        dispatch({ type: ALL_USERS_REQUEST })
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        }
+
+        const { data } = await axios.get(`${import.meta.env.VITE_API}/admin/users`, config)
+
+        dispatch({
+            type: ALL_USERS_SUCCESS,
+            payload: data.users
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ALL_USERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_USER_REQUEST })
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        }
+
+        const { data } = await axios.delete(`${import.meta.env.VITE_API}/admin/user/${id}`, config)
+
+        dispatch({
+            type: DELETE_USER_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updateUser = (id, userData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_USER_REQUEST })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+        }
+
+        const { data } = await axios.put(`${import.meta.env.VITE_API}/admin/user/${id}`, userData, config)
+
+        dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const getUserDetails = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: USER_DETAILS_REQUEST })
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+        }
+
+        const { data } = await axios.get(`${import.meta.env.VITE_API}/admin/user/${id}`, config)
+
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: data.user
+        })
+
+    } catch (error) {
+        dispatch({
+            type: USER_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 
 
