@@ -91,11 +91,12 @@ const UpdateUser = () => {
         if (isUpdated) {
             successMsg('User updated successfully')
 
-            // navigate('/admin/users')
+            navigate('/admin/users')
 
             dispatch({
                 type: UPDATE_USER_RESET
             })
+
         }
 
     }, [dispatch, error, navigate, isUpdated, id, user])
