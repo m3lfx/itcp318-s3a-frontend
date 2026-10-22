@@ -166,7 +166,16 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/admin/user/:id" element={<UpdateUser />} />
+
+          <Route
+            path="/admin/user/:id"
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <UpdateUser />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route path="/admin/user/:id" element={<UpdateUser />} /> */}
 
           <Route
             path="/admin/products"
