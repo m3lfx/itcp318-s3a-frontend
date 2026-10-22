@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer, } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 
@@ -154,9 +154,18 @@ function App() {
           <Route
             path="/admin/order/:id"
             element={<ProcessOrder />} />
+          {/* <Route
+            path="/admin/users"
+            element={<UsersList />} /> */}
+
           <Route
             path="/admin/users"
-            element={<UsersList />} />
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <UsersList />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/admin/user/:id" element={<UpdateUser />} />
 
           <Route
